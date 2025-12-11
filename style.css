@@ -87,4 +87,7 @@ button
         pointer-events: all;
         font-size: 14px;
     }
+    html, body {
+  touch-action: manipulation;
+}
 }
