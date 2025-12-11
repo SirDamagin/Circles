@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Clicker</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <div class="text">
+      <button onclick="popup();">Leaderboard</button>
+      <p class="p1">
+      Hai 15 secondi per cliccare il maggiore numero di pallini che puoi
+      </p>
+      <p class="p2">
+        Clicca sul pallino per cominciare
+      </p> 
+    </div>
+    
+    <div class="pop" onclick="popup();">
+      <p>Ancora in lavorazione</p>
+    </div>
+
+    <svg viewBox="0 0 200 200" width="100%" height="100%">
+      <circle onclick="generate();" class="circ" r="5" fill="red" cx="100" cy="100"></circle>
+    </svg>
+
+  </body>
+
+  <script>
+    let timer = false;
+    let circ = document.querySelector('.circ')
+    let p1 = document.querySelector('.p1')
+    let p2 = document.querySelector('.p2')
+    let score = 0
+    let leaderboard = document.querySelector('button')
+    let pop = document.querySelector('.pop')
+    let active = false;
+
+    function generate()
+    {
+      if(timer == false)
+      {
+        p2.innerHTML = ""
+        leaderboard.outerHTML = ""
+        timer = true
+        let counter = 15;
+        p1.innerHTML = counter
+        myInterval = setInterval(()=>{
+          counter--
+          p1.innerHTML = counter
+          if(counter==0)
+          {
+            clearInterval(myInterval);
+            p1.innerHTML = "Score: " + score
+          }
+        },1000)
+        
+      }
+      
+      score++
+      circ.setAttribute("cx",Math.random()*200)
+      circ.setAttribute("cy",Math.random()*200)
+      circ.setAttribute("fill","rgb(" + Math.random()*256 + "," + Math.random()*256 + "," + Math.random()*256 + ")")
+      let size = Math.random()*50;
+      while(size<1)
+      {
+        size = Math.random()*50;
+      }
+      circ.setAttribute("r",size)
+    }
+
+    function popup()
+    {
+      if(active == false)
+      {
+        pop.classList.add('poppato')
+        active = true
+      }
+      else
+      {
+        pop.classList.remove('poppato')
+        active = false
+      }
+      
+    }
+  </script>
+</html>
+
+<!-- Magari non tocchi html css da un po pero figo questa cosa che hai fatto -->
